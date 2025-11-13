@@ -1,0 +1,66 @@
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+250815 15:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Connect	Access denied for user 'root'@'localhost'
+250815 15:xxx:xxx	     4 Connect	root@localhost on  using Socket
+		     4 Connect	Access denied for user 'root'@'localhost'
+250815 15:xxx:xxx	     5 Connect	root@localhost on  using TCP/IP
+		     5 Connect	Access denied for user 'root'@'localhost'
+250815 15:xxx:xxx	     6 Connect	root@localhost on  using TCP/IP
+		     6 Connect	Access denied for user 'root'@'localhost'
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+250815 16:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Connect	Access denied for user 'root'@'localhost'
+250815 16:xxx:xxx	     4 Connect	root@localhost on  using Socket
+		     4 Query	select @@version_comment limit 1
+250815 16:xxx:xxx	     4 Query	ALTER USER 'root'@'localhost' IDENTIFIED BY 'Harsh0@server'
+		     4 Query	FLUSH PRIVILEGES
+250815 16:xxx:xxx	     5 Connect	root@localhost on  using Socket
+		     5 Query	select @@version_comment limit 1
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+250904 13:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Connect	Access denied for user 'root'@'localhost' (using password: NO)
+250904 13:xxx:xxx	     4 Connect	root@localhost on  using Socket
+		     4 Query	select @@version_comment limit 1
+250904 13:xxx:xxx	     4 Query	show databases
+250904 19:xxx:xxx	     4 Quit	
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+250906 14:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Connect	Access denied for user 'root'@'localhost' (using password: NO)
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+251113 14:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Connect	Access denied for user 'root'@'localhost' (using password: NO)
+251113 15:xxx:xxx	     4 Connect	root@localhost on  using Socket
+251113 15:xxx:xxx	     4 Query	select @@version_comment limit 1
+251113 15:xxx:xxx	     4 Query	show databases
+251113 15:xxx:xxx	     4 Query	select users from mysql.user
+251113 15:xxx:xxx	     4 Query	select user from mysql.user
+251113 15:xxx:xxx	     4 Query	SELECT User, Host FROM mysql.user WHERE User = ''
+251113 15:xxx:xxx	     4 Query	DELETE FROM mysql.user WHERE User = ''
+251113 15:xxx:xxx	     4 Query	FLUSH PRIVILEGES
+251113 15:xxx:xxx	     4 Query	select user from mysql.user
+251113 20:xxx:xxx	     5 Connect	root@localhost on  using Socket
+		     5 Query	SHOW VARIABLES LIKE 'pid_file'
+		     5 Shutdown	
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+251113 20:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Quit	
+251113 20:xxx:xxx	     4 Connect	root@localhost on  using Socket
+		     4 Query	SHOW VARIABLES LIKE 'pid_file'
+		     4 Shutdown	
+/db1/myserver/mariadb/mariadb_files/bin/mariadbd, Version: 10.11.14-MariaDB-log (MariaDB Server). started with:
+Tcp port xxx  Unix socket: /db1/myserver/mariadb/run/mysql.sock
+Time		    Id Command	Argument
+251113 20:xxx:xxx	     3 Connect	root@localhost on  using Socket
+		     3 Quit	
