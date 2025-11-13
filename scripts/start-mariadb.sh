@@ -1,6 +1,7 @@
 #!/bin/bash
 # ================================================
 # Start MariaDB (local install under /db1/myserver/mariadb)
+# - Embedded password for mysqladmin ping
 # - Robust readiness check (socket+port and/or mysqladmin ping)
 # - Clear success/failure reporting
 # ================================================
@@ -10,7 +11,7 @@ set -u  # treat unset vars as error
 set -o pipefail
 
 BASE="/db1/myserver/mariadb"
-CNF="$BASE/config/my.cnf"
+CNF="$BASE/config/mariadb.cnf"
 LOG_DIR="$BASE/logs"
 RUN_DIR="$BASE/run"
 SOCKET="$RUN_DIR/mysql.sock"
@@ -19,6 +20,9 @@ LOG_FILE="$LOG_DIR/startup-$(date +'%Y-%m-%d_%H-%M-%S').log"
 
 MYSQLADMIN="$BASE/mariadb_files/bin/mysqladmin"
 MYSQLD_SAFE="$BASE/mariadb_files/bin/mysqld_safe"
+
+# >>> EMBEDDED DB PASSWORD HERE <<<
+DB_PASSWORD='your_password'
 
 mkdir -p "$LOG_DIR" "$RUN_DIR" "$BASE/tmp"
 
@@ -31,19 +35,17 @@ fi
 echo "[INFO] Starting MariaDB with $CNF ..." | tee -a "$LOG_FILE"
 
 # Start in background and log output
-# mysqld_safe keeps supervising, mariadbd becomes the server
 "$MYSQLD_SAFE" --defaults-file="$CNF" >> "$LOG_FILE" 2>&1 &
 
 # --- readiness function ---
 is_up() {
-  # 1) Try mysqladmin ping WITHOUT password to avoid hanging;
-  #    if unix_socket auth is enabled for root, this succeeds.
-  #    We silence output; only return code matters.
-  if "$MYSQLADMIN" --protocol=SOCKET -u root -S "$SOCKET" ping >/dev/null 2>&1; then
+  # 1) Try mysqladmin ping WITH embedded password
+  #    -p"$DB_PASSWORD" ensures @ is interpreted literally
+  if "$MYSQLADMIN" --protocol=SOCKET -u root -p"$DB_PASSWORD" -S "$SOCKET" ping >/dev/null 2>&1; then
     return 0
   fi
 
-  # 2) If ping fails (e.g., root requires password), confirm socket + port 3306 are live
+  # 2) If ping fails (startup still ongoing), confirm socket + port 3306
   if [ -S "$SOCKET" ] && ss -ltnp 2>/dev/null | grep -qE 'LISTEN\s+0\s+.*:3306.*\((\"mariadbd\"|\"mysqld\")'; then
     return 0
   fi
@@ -62,10 +64,4 @@ done
 
 # --- not ready: print helpful diagnostics and fail ---
 echo "[ERROR] MariaDB did not become ready within 30s. See logs for details:" | tee -a "$LOG_FILE"
-echo "  - Startup log: $LOG_FILE" | tee -a "$LOG_FILE"
-echo "  - Error log:   $ERROR_LOG" | tee -a "$LOG_FILE"
-if [ -f "$ERROR_LOG" ]; then
-  echo "----- tail -n 60 $ERROR_LOG -----" | tee -a "$LOG_FILE"
-  tail -n 60 "$ERROR_LOG" | sed 's/^/[error.log] /' | tee -a "$LOG_FILE"
-fi
-exit 1
+echo "  - St
