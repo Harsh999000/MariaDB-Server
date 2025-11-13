@@ -4,6 +4,7 @@
 # Logs stored at: /db1/myserver/mariadb/cronlog/cron-execution.log
 # ================================================
 
+```bash
 # Rotate error.log at 12:01 AM
 1 0 * * * echo "[Rotate error.log] $(date)" >> /db1/myserver/mariadb/cronlog/cron-execution.log && mv /db1/myserver/mariadb/logs/error.log /db1/myserver/mariadb/logs/error-$(date -d "yesterday" +%F).log >> /db1/myserver/mariadb/cronlog/cron-execution.log 2>&1
 
